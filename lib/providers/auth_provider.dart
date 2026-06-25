@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class AuthProvider extends ChangeNotifier {
-  bool get estaAutenticado => false;
+/// Interface comum para autenticação.
+/// Tanto o AuthProviderFirebase quanto o AuthProviderMock a implementam.
+abstract class AuthProvider extends ChangeNotifier {
+  bool get estaAutenticado;
+  bool get carregando;
+  String? get erro;
 
-  Future<void> login(String email, String password) async {
-    // Simula uma chamada de login
-    await Future.delayed(Duration(seconds: 2));
-    print('Usuário logado: $email');
-  }
+  /// Retorna um objeto com uid, email e displayName (ou null se não autenticado).
+  AuthUser? get usuario;
 
-  Future<void> cadastra(String email, String password) async {
-    // Simula uma chamada de registro
-    await Future.delayed(Duration(seconds: 2));
-    print('Usuário registrado: $email');
-  }
+  Future<bool> login(String email, String senha);
+  Future<bool> cadastrar(String email, String senha);
+  Future<void> logout();
+}
+
+/// Dados básicos do usuário autenticado (independente do Firebase).
+class AuthUser {
+  final String uid;
+  final String email;
+  final String? displayName;
+  const AuthUser({required this.uid, required this.email, this.displayName});
 }

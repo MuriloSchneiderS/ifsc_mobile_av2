@@ -1,33 +1,56 @@
 class Usuario {
-  String? _id; //pode ser nulo, pois o id é gerado automaticamente pelo banco de dados
-  String nome;
-  String? email;//email e senha podem ser nulos, pois o usuário pode se cadastrar usando o Google Sign-In, nesse caso o email e senha serão nulos
-  String? senha; 
+  final String id; // UID do Firebase Auth
+  final String nome;
+  final String email;
+  final double? latitude;
+  final double? longitude;
+  final String? fotoPerfil;
 
-  Usuario({
-    String? id,
+  const Usuario({
+    required this.id,
     required this.nome,
-    this.email,
-    this.senha,
-  }) : _id = id;
-
-  String? get id => _id;
+    required this.email,
+    this.latitude,
+    this.longitude,
+    this.fotoPerfil,
+  });
 
   Map<String, dynamic> toMap() {
     return {
-      'id': _id,
+      'id': id,
       'nome': nome,
       'email': email,
-      'senha': senha,
+      'latitude': latitude,
+      'longitude': longitude,
+      'fotoPerfil': fotoPerfil,
     };
   }
 
   factory Usuario.fromMap(Map<String, dynamic> map) {
     return Usuario(
-      id: map['id'],
-      nome: map['nome'],
-      email: map['email'],
-      senha: map['senha'],
+      id: map['id'] ?? '',
+      nome: map['nome'] ?? '',
+      email: map['email'] ?? '',
+      latitude: (map['latitude'] as num?)?.toDouble(),
+      longitude: (map['longitude'] as num?)?.toDouble(),
+      fotoPerfil: map['fotoPerfil'],
+    );
+  }
+
+  Usuario copyWith({
+    String? nome,
+    String? email,
+    double? latitude,
+    double? longitude,
+    String? fotoPerfil,
+  }) {
+    return Usuario(
+      id: id,
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      fotoPerfil: fotoPerfil ?? this.fotoPerfil,
     );
   }
 }
