@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'package:ifsc_mobile_av2/providers/auth_provider.dart';
-import 'package:ifsc_mobile_av2/providers/auth_provider_mock.dart';
-// import 'package:ifsc_mobile_av2/providers/auth_provider_firebase.dart'; // ← descomentar após configurar Firebase
+import 'package:ifsc_mobile_av2/providers/auth_provider_firebase.dart';
+
 import 'package:ifsc_mobile_av2/providers/publicacao_provider.dart';
 import 'package:ifsc_mobile_av2/providers/usuario_provider.dart';
+
+import 'package:ifsc_mobile_av2/util/rotas.dart';
 import 'package:ifsc_mobile_av2/telas/tela_inicial.dart';
 import 'package:ifsc_mobile_av2/telas/tela_exibicao.dart';
 import 'package:ifsc_mobile_av2/telas/tela_cadastro.dart';
 import 'package:ifsc_mobile_av2/telas/tela_publicacao.dart';
 import 'package:ifsc_mobile_av2/telas/tela_home.dart';
-import 'package:ifsc_mobile_av2/util/rotas.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(const BookshareApp());
 }
 
@@ -24,7 +33,7 @@ class BookshareApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProviderMock()),
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProviderFirebase()),
         ChangeNotifierProvider(create: (_) => UsuarioProvider()),
         ChangeNotifierProvider(create: (_) => PublicacaoProvider()),
       ],

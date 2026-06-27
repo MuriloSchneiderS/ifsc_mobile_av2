@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:ifsc_mobile_av2/providers/auth_provider.dart';
 
 class AuthProviderFirebase extends AuthProvider {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
   AuthUser? _usuario;
   String? _erro;
   bool _carregando = false;
@@ -29,7 +29,7 @@ class AuthProviderFirebase extends AuthProvider {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
       _carregando = false; notifyListeners();
       return true;
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       _erro = _traduzir(e.code); _carregando = false; notifyListeners();
       return false;
     }
@@ -42,7 +42,7 @@ class AuthProviderFirebase extends AuthProvider {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       _carregando = false; notifyListeners();
       return true;
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       _erro = _traduzir(e.code); _carregando = false; notifyListeners();
       return false;
     }

@@ -8,7 +8,7 @@ import 'package:ifsc_mobile_av2/util/rotas.dart';
 import 'package:ifsc_mobile_av2/models/publicacao.dart';
 
 class TelaHome extends StatefulWidget {
-  const TelaHome({Key? key}) : super(key: key);
+  const TelaHome({super.key});
 
   @override
   State<TelaHome> createState() => _TelaHomeState();
@@ -195,12 +195,11 @@ class _CardLivro extends StatelessWidget {
   final VoidCallback? aoRemover;
 
   const _CardLivro({
-    Key? key,
     required this.publicacao,
     required this.eMeu,
     required this.aoTocar,
     this.aoRemover,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +222,7 @@ class _CardLivro extends StatelessWidget {
                           publicacao.miniatura!,
                           width: double.infinity,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => _capaPlaceholder(),
+                          errorBuilder: (_, _, _) => _capaPlaceholder(),
                         )
                       : _capaPlaceholder(),
                 ),

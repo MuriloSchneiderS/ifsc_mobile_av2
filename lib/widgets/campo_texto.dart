@@ -11,7 +11,7 @@ class CampoTexto extends StatelessWidget {
   final int maxLinhas;
 
   const CampoTexto({
-    Key? key,
+    super.key,
     required this.rotulo,
     this.dica,
     required this.controlador,
@@ -20,7 +20,7 @@ class CampoTexto extends StatelessWidget {
     this.validador,
     this.icone,
     this.maxLinhas = 1,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

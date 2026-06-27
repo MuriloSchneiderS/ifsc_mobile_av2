@@ -9,7 +9,7 @@ import 'package:ifsc_mobile_av2/widgets/mensagem_erro.dart';
 /// Tela de cadastro standalone (acessível pela rota /cadastro se necessário)
 /// No fluxo principal o cadastro fica na tab da tela_inicial.
 class TelaCadastro extends StatefulWidget {
-  const TelaCadastro({Key? key}) : super(key: key);
+  const TelaCadastro({super.key});
 
   @override
   State<TelaCadastro> createState() => _TelaCadastroState();

@@ -6,7 +6,7 @@ import 'package:ifsc_mobile_av2/providers/auth_provider.dart';
 import 'package:ifsc_mobile_av2/widgets/mensagem_erro.dart';
 
 class TelaPublicacao extends StatefulWidget {
-  const TelaPublicacao({Key? key}) : super(key: key);
+  const TelaPublicacao({super.key});
 
   @override
   State<TelaPublicacao> createState() => _TelaPublicacaoState();
@@ -43,7 +43,7 @@ class _TelaPublicacaoState extends State<TelaPublicacao> {
       descricao: _descricaoCtrl.text.trim().isEmpty ? null : _descricaoCtrl.text.trim(),
       arquivo: _arquivoCtrl.text.trim(),
       miniatura: _miniaturaCtrl.text.trim().isEmpty ? null : _miniaturaCtrl.text.trim(),
-      nomeUsuario: fireUser?.displayName ?? fireUser?.email?.split('@').first ?? 'Anônimo',
+      nomeUsuario: fireUser?.displayName ?? fireUser?.email.split('@').first ?? 'Anônimo',
       uidUsuario: fireUser?.uid ?? '',
       tipo: _tipoSelecionado,
       criadoEm: DateTime.now(),
