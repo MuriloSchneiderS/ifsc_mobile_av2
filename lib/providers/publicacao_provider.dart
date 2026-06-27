@@ -8,11 +8,10 @@ class PublicacaoProvider with ChangeNotifier {
   bool _carregando = false;
   String? _erro;
 
-  static const String _baseUrl =
-      'https://project-2398835836236741984-default-rtdb.firebaseio.com';
+  static const String _baseUrl = 'https://bookshare-e2b60-default-rtdb.firebaseio.com/';//realtime database
 
   // Dados de demonstração usados quando não há Firebase configurado
-  static final List<Map<String, dynamic>> _dadosDemo = [
+  static final List<Map<String, dynamic>> _dadosDemo = [//Mock
     {
       'id': 'demo1',
       'titulo': 'Dom Quixote',

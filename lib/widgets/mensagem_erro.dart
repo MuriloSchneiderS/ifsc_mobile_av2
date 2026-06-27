@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MensagemErro extends StatelessWidget {
   final String mensagem;
-  const MensagemErro({Key? key, required this.mensagem}) : super(key: key);
+  const MensagemErro({super.key, required this.mensagem});
 
   @override
   Widget build(BuildContext context) {

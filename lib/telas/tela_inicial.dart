@@ -5,7 +5,7 @@ import 'package:ifsc_mobile_av2/util/rotas.dart';
 import 'package:ifsc_mobile_av2/widgets/mensagem_erro.dart';
 
 class TelaInicial extends StatefulWidget {
-  const TelaInicial({Key? key}) : super(key: key);
+  const TelaInicial({super.key});
 
   @override
   State<TelaInicial> createState() => _TelaInicialState();
@@ -80,36 +80,6 @@ class _TelaInicialState extends State<TelaInicial> with SingleTickerProviderStat
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 28),
-
-              // Botões sociais
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _BotaoSocial(
-                    onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login Google: integre com google_sign_in'))),
-                    child: Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png',
-                      width: 32, height: 32,
-                      errorBuilder: (_, __, ___) => const Icon(Icons.g_mobiledata, size: 32, color: Colors.red),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  _BotaoSocial(
-                    onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login Microsoft: integre com msal_flutter'))),
-                    child: Container(
-                      width: 32, height: 32,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0078D4),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Icon(Icons.mail, color: Colors.white, size: 20),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
 
               // Tabs Login / Cadastro
               Container(
@@ -231,28 +201,6 @@ class _TelaInicialState extends State<TelaInicial> with SingleTickerProviderStat
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _BotaoSocial extends StatelessWidget {
-  final Widget child;
-  final VoidCallback onTap;
-  const _BotaoSocial({required this.child, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 64, height: 64,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: const Offset(0, 2))],
-        ),
-        child: Center(child: child),
       ),
     );
   }

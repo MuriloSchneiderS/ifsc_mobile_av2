@@ -5,14 +5,14 @@ import 'package:ifsc_mobile_av2/providers/publicacao_provider.dart';
 import 'package:ifsc_mobile_av2/util/rotas.dart';
 
 class TelaPerfil extends StatelessWidget {
-  const TelaPerfil({Key? key}) : super(key: key);
+  const TelaPerfil({super.key});
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
     final pubProvider = context.watch<PublicacaoProvider>();
     final usuario = auth.usuario;
-    final nome = usuario?.displayName ?? usuario?.email?.split('@').first ?? 'Usuário';
+    final nome = usuario?.displayName ?? usuario?.email.split('@').first ?? 'Usuário';
     final email = usuario?.email ?? '';
     final minhasPublicacoes = pubProvider.publicacoes
         .where((p) => p.uidUsuario == usuario?.uid)
@@ -130,7 +130,7 @@ class TelaPerfil extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   child: temCapa
                                       ? Image.network(pub.miniatura!, width: double.infinity, fit: BoxFit.cover,
-                                          errorBuilder: (_, __, ___) => _capaFallback(pub))
+                                          errorBuilder: (_, _, _) => _capaFallback(pub))
                                       : _capaFallback(pub),
                                 ),
                               ),

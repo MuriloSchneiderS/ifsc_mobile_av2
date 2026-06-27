@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ifsc_mobile_av2/models/publicacao.dart';
 
 class TelaExibicao extends StatefulWidget {
-  const TelaExibicao({Key? key}) : super(key: key);
+  const TelaExibicao({super.key});
 
   @override
   State<TelaExibicao> createState() => _TelaExibicaoState();
@@ -62,7 +62,7 @@ class _TelaExibicaoState extends State<TelaExibicao> {
                                 width: double.infinity,
                                 height: 200,
                                 fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => const SizedBox(),
+                                errorBuilder: (_, _, _) => const SizedBox(),
                               ),
                             ),
                           if (temCapa) const SizedBox(height: 16),

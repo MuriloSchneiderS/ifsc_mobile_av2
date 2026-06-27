@@ -8,11 +8,11 @@ class CardPublicacao extends StatelessWidget {
   final VoidCallback? aoRemover;
 
   const CardPublicacao({
-    Key? key,
+    super.key,
     required this.publicacao,
     this.aoTocar,
     this.aoRemover,
-  }) : super(key: key);
+  });
 
   IconData get _icone {
     switch (publicacao.tipo) {
@@ -53,7 +53,7 @@ class CardPublicacao extends StatelessWidget {
                       height: 160,
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholder(context),
+                      errorBuilder: (_, _, _) => _placeholder(context),
                     )
                   : _placeholder(context),
             ),

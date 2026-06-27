@@ -7,12 +7,12 @@ class BotaoPrimario extends StatelessWidget {
   final IconData? icone;
 
   const BotaoPrimario({
-    Key? key,
+    super.key,
     required this.texto,
     this.aoTocar,
     this.carregando = false,
     this.icone,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
