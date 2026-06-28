@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:cloud_firestore/cloud_firestore.dart' as firestore;
 import 'package:ifsc_mobile_av2/providers/auth_provider.dart';
 
 class AuthProviderFirebase extends AuthProvider {
   final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
+  final firestore.FirebaseFirestore _firestore = firestore.FirebaseFirestore.instance;
   AuthUser? _usuario;
   String? _erro;
   bool _carregando = false;
@@ -36,16 +38,36 @@ class AuthProviderFirebase extends AuthProvider {
   }
 
   @override
-  Future<bool> cadastrar(String email, String senha) async {
+  Future<bool> cadastrar(String nome, String email, String senha) async {
     try {
-      _carregando = true; _erro = null; notifyListeners();
-      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
-      _carregando = false; notifyListeners();
+       _carregando = true;
+      _erro = null;
+      notifyListeners();
+
+      // Cria o usuário no Firebase Authentication
+      firebase_auth.UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: senha);
+      // Atualizar displayName no Auth
+      await userCredential.user!.updateDisplayName(nome);
+      // Salvar dados do usuário no Firestore
+      await _firestore.collection('usuarios').doc(userCredential.user!.uid).set({
+        'nome': nome,
+        'email': email,
+        'criadoEm': firestore.FieldValue.serverTimestamp(),
+      });
+      
+      _carregando = false; 
+      notifyListeners();
       return true;
     } on firebase_auth.FirebaseAuthException catch (e) {
-      _erro = _traduzir(e.code); _carregando = false; notifyListeners();
+      _erro = _traduzir(e.code); _carregando = false; 
+      notifyListeners();
       return false;
-    }
+    } catch (e) {  // Erros do Firestore
+      _erro = _traduzir('Erro ao salvar dados do usuário: $e');
+      _carregando = false;
+      notifyListeners();
+      return false;
+  }
   }
 
   @override

@@ -62,7 +62,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
 
     final auth = context.read<AuthProvider>();
     final usuarioProvider = context.read<UsuarioProvider>();
-    final ok = await auth.cadastrar(_emailCtrl.text.trim(), _senhaCtrl.text);
+    final ok = await auth.cadastrar(_nomeCtrl.text.trim(), _emailCtrl.text.trim(), _senhaCtrl.text);
 
     if (ok && mounted) {
       final uid = auth.usuario!.uid;

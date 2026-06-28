@@ -11,7 +11,7 @@ abstract class AuthProvider extends ChangeNotifier {
   AuthUser? get usuario;
 
   Future<bool> login(String email, String senha);
-  Future<bool> cadastrar(String email, String senha);
+  Future<bool> cadastrar(String nome, String email, String senha);
   Future<void> logout();
 }
 

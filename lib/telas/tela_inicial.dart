@@ -52,7 +52,7 @@ class _TelaInicialState extends State<TelaInicial> with SingleTickerProviderStat
   Future<void> _cadastrar() async {
     if (!_cadFormKey.currentState!.validate()) return;
     final auth = context.read<AuthProvider>();
-    final ok = await auth.cadastrar(_cadEmailCtrl.text.trim(), _cadSenhaCtrl.text);
+    final ok = await auth.cadastrar(_cadNomeCtrl.text.trim(), _cadEmailCtrl.text.trim(), _cadSenhaCtrl.text);
     if (ok && mounted) Navigator.pushReplacementNamed(context, Rotas.telaHome);
   }
 

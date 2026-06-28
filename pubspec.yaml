@@ -21,6 +21,7 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_spinkit: ^5.2.1
   intl: ^0.20.2
+  cloud_firestore: ^5.6.12
 
 dev_dependencies:
   flutter_test:
