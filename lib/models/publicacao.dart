@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 enum TipoPublicacao { imagem, pdf, livro, outro }
 
 class Publicacao {
-  final String? id;
+  final String id;
   final String titulo;
   final String? descricao;
   final String arquivo;
@@ -12,7 +14,7 @@ class Publicacao {
   final DateTime? criadoEm;
 
   Publicacao({
-    this.id,
+    required this.id,
     required this.titulo,
     this.descricao,
     required this.arquivo,
@@ -49,11 +51,25 @@ class Publicacao {
   factory Publicacao.fromMap(Map<String, dynamic> map) {
     TipoPublicacao tipo;
     try {
-      tipo = TipoPublicacao.values
-          .firstWhere((e) => e.name == (map['tipo'] ?? 'outro'));
+      tipo = TipoPublicacao.values.firstWhere(
+        (e) => e.name == (map['tipo'] ?? 'outro'),
+      );
     } catch (_) {
       tipo = TipoPublicacao.outro;
     }
+
+    DateTime? dataCriacao;
+    if (map['criadoEm'] != null) {
+      final criadoEm = map['criadoEm'];
+      if (criadoEm is String) {
+        // Se for String, faz parse normalmente
+        dataCriacao = DateTime.tryParse(criadoEm);
+      } else if (criadoEm is Timestamp) {
+        // Se for Timestamp do Firebase, converte para DateTime
+        dataCriacao = criadoEm.toDate();
+      }
+    }
+
     return Publicacao(
       id: map['id'],
       titulo: map['titulo'] ?? '',
@@ -63,9 +79,7 @@ class Publicacao {
       nomeUsuario: map['nomeUsuario'] ?? 'Anônimo',
       uidUsuario: map['uidUsuario'] ?? '',
       tipo: tipo,
-      criadoEm: map['criadoEm'] != null
-          ? DateTime.tryParse(map['criadoEm'])
-          : null,
+      criadoEm: dataCriacao,
     );
   }
 }

@@ -39,6 +39,7 @@ class _TelaPublicacaoState extends State<TelaPublicacao> {
     final fireUser = auth.usuario;
 
     final publicacao = Publicacao(
+      id: '', // O ID será gerado pelo Firestore
       titulo: _tituloCtrl.text.trim(),
       descricao: _descricaoCtrl.text.trim().isEmpty ? null : _descricaoCtrl.text.trim(),
       arquivo: _arquivoCtrl.text.trim(),
@@ -49,7 +50,7 @@ class _TelaPublicacaoState extends State<TelaPublicacao> {
       criadoEm: DateTime.now(),
     );
 
-    final ok = await context.read<PublicacaoProvider>().addPublicacao(publicacao);
+    final ok = await context.read<PublicacaoProvider>().criarPublicacao(publicacao);
 
     if (mounted) {
       setState(() => _enviando = false);

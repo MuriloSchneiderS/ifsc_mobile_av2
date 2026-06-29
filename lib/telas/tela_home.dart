@@ -44,7 +44,7 @@ class _TelaHomeState extends State<TelaHome> {
       ),
     );
     if (confirm == true && mounted) {
-      await context.read<PublicacaoProvider>().removerPublicacao(pub.id!);
+      await context.read<PublicacaoProvider>().deletarPublicacao(pub.id);
     }
   }
 
@@ -159,6 +159,7 @@ class _FeedBody extends StatelessWidget {
                 sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
                     (ctx, i) {
+                      print('Construindo card do livro ${pubProvider.publicacoes[i].titulo}');
                       final pub = pubProvider.publicacoes[i];
                       final eMeu = auth.usuario?.uid == pub.uidUsuario;
                       return _CardLivro(
