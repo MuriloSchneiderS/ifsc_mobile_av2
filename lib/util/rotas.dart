@@ -5,6 +5,7 @@ class Rotas {
   static const String telaPublicacao = '/publicacao';
   static const String telaExibicao = '/exibicao';
   static const String telaHome = '/home';
+  static const String telaPerfil = '/perfil';
 }
 
 
